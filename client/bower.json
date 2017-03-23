@@ -1,0 +1,21 @@
+{
+  "name": "twitter",
+  "description": "QuickStart package.json from the documentation, supplemented with testing support",
+  "main": "",
+  "authors": [
+    "Gustavo Molinari <info@beetlegius.com.ar>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/beetlegius/lab-twitter",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
