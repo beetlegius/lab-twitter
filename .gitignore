@@ -1,11 +1,9 @@
 client/node_modules
 client/bower_components
-client/src/**/*.js
-!client/src/systemjs.config.extras.js
-!client/src/systemjs.config.js
-!client/src/systemjs-angular-loader.js
+client/**/*.js
+!client/systemjs.config.extras.js
+!client/systemjs.config.js
+!client/systemjs-angular-loader.js
 *.js.map
-client/e2e/**/*.js
-client/e2e/**/*.js.map
 
 node_modules
