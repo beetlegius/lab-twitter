@@ -12,8 +12,6 @@ export class TweetsService {
   }
 
   all(){
-    // Example
-    // return this.http.get('https://jsonplaceholder.typicode.com/comments').map(res => res.json());
     return this.http.get('/api/tweets').map(res => res.json());
   }
 
