@@ -21,5 +21,10 @@
     "ejs": "^2.5.6",
     "express": "^4.15.2",
     "mongojs": "^2.4.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.2.0",
+    "typescript": "~2.0.10",
+    "@types/node": "^6.0.46"
   }
 }

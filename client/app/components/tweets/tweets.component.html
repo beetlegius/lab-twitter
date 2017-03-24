@@ -1,15 +1,23 @@
-<form *ngIf="auth.authenticated()" class="well" (submit)="addTweet($event)">
+<form *ngIf="auth.authenticated()" class="well" (submit)="addTweet($event)" autocomplete="off">
   <div class="form-group">
     <input autofocus type="text" [(ngModel)]="body" name="body" class="form-control" placeholder="¿What do you think?">
   </div>
 </form>
+
+<ul>
+  <li *ngFor="let relationship of relationships">
+    {{relationship.userToId}}
+    <input type="button" [class.hidden]="!auth.authenticated()" class="btn btn-danger btn-xs" value="Delete" (click)="unfollow(relationship)">
+  </li>
+</ul>
 
 <div class="tweets">
   <div *ngFor="let tweet of tweets" class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">
         {{tweet.username}}
-        <input type="button" [class.hidden]="!auth.authenticated() || !auth.userProfile || !(tweet.username == auth.userProfile.nickname)" class="btn btn-danger btn-xs" value="Delete" (click)="deleteTweet(tweet)">
+        <input type="button" [class.hidden]="!auth.authenticated() || !auth.userProfile || !(tweet.userId == auth.userProfile.user_id)" class="btn btn-danger btn-xs" value="Delete" (click)="deleteTweet(tweet)">
+        <input type="button" [class.hidden]="!auth.authenticated() || !auth.userProfile || (tweet.userId == auth.userProfile.user_id) || isFollowing(tweet.userId)" class="btn btn-info btn-xs" value="Follow" (click)="follow(tweet.userId)">
       </h3>
     </div>
     <div class="panel-body">

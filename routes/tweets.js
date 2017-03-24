@@ -3,11 +3,6 @@ var router = express.Router();
 var mongojs = require('mongojs');
 var db = mongojs('mongodb://beetlegius:beetlegius@ds139480.mlab.com:39480/twitter', ['tweets']);
 
-var render = function(err, data) {
-  if (err) { res.send(err); }
-  res.json(data);
-}
-
 router.get('/tweets', function(req, res, next){
   db.tweets.find(function(err, data){
     if (err) { res.send(err); }
@@ -41,15 +36,6 @@ router.delete('/tweets/:id', function(req, res, next){
     res.json(data);
   });
 });
-
-
-router.delete('/tweets/:id', function(req, res, next){
-  db.tweets.remove({ _id: mongojs.ObjectId(req.params.id) }, function(err, data){
-    if (err) { res.send(err); }
-    res.json(data);
-  });
-});
-
 
 router.put('/tweets/:id', function(req, res, next){
   var tweet = req.body;
