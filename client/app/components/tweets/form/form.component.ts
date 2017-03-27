@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { TweetsService } from '../../services/tweets.service';
-import { RelationshipsService } from '../../services/relationships.service';
-import { Auth } from '../../services/auth.service';
+import { TweetsService } from '@service/tweets';
+import { RelationshipsService } from '@service/relationships';
+import { Auth } from '@service/auth';
+// import { TweetsService } from '../../../services/tweets.service';
+// import { RelationshipsService } from '../../../services/relationships.service';
+// import { Auth } from '../../../services/auth.service';
 
-import { Tweet } from '../../models/tweet';
-import { Relationship } from '../../models/relationship';
+import { Tweet } from '../../../models/tweet';
+import { Relationship } from '../../../models/relationship';
 
 @Component({
   moduleId: module.id,
-  selector: 'tweets',
-  templateUrl: 'tweets.component.html',
+  selector: 'tweet-form',
+  templateUrl: 'form.component.html',
 })
-export class TweetsComponent implements OnInit {
+export class TweetsFormComponent implements OnInit {
   tweets: Tweet[];
   relationships: Relationship[];
   body: string;

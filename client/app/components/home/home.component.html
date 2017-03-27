@@ -1,3 +1,17 @@
-<h1 [class.hidden]='!auth.authenticated() || !auth.userProfile'>Welcome, {{auth.userProfile && auth.userProfile.name}}</h1>
-
-<tweets></tweets>
+<div class="row">
+  <div class="col-md-2">
+    <div class="text-center" [class.hidden]='!auth.authenticated() || !auth.userProfile'>
+      <h1>Welcome!</h1>
+      <div class="thumbnail">
+        <img style='width: 100%' src="{{auth.userProfile && auth.userProfile.picture}}">
+        <div class="caption">
+          <h4>{{auth.userProfile && auth.userProfile.name}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <tweet-form></tweet-form>
+    <tweets-box></tweets-box>
+  </div>
+</div>
