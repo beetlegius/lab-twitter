@@ -1,5 +1,5 @@
 export class Tweet {
-  _id: number;
+  _id: string;
   userId: string;
   username: string;
   body: string;

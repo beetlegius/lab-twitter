@@ -22,7 +22,7 @@ export class TweetsComponent implements OnInit {
   ngOnInit(){
     this.relationshipsService.all().subscribe(relationships => {
       this.relationships = relationships;
-    })
+    });
     this.tweetsService.all().subscribe(tweets => {
       this.tweets = tweets;
     });
@@ -31,7 +31,6 @@ export class TweetsComponent implements OnInit {
   addTweet(event: Event){
     event.preventDefault();
     var newTweet = {
-      _id: 0,
       userId: this.auth.userProfile.user_id,
       username: this.auth.userProfile.nickname,
       body: this.body
@@ -61,7 +60,6 @@ export class TweetsComponent implements OnInit {
   follow(user_id: string) {
     if (!this.relationships.some(relationship => relationship.userToId == user_id)) {
       var newRelationship = {
-        _id: 0,
         userFromId: this.auth.userProfile.user_id,
         userToId: user_id
       }

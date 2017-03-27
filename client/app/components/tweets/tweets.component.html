@@ -5,7 +5,7 @@
 </form>
 
 <ul>
-  <li *ngFor="let relationship of relationships">
+  <li [class.hidden]="!auth.authenticated()" *ngFor="let relationship of relationships">
     {{relationship.userToId}}
     <input type="button" [class.hidden]="!auth.authenticated()" class="btn btn-danger btn-xs" value="Delete" (click)="unfollow(relationship)">
   </li>

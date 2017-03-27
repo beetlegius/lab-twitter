@@ -19,7 +19,7 @@ export class TweetsService {
     return this.http.get('/api/tweets/' + id).map(res => res.json());
   }
 
-  create(tweet: Tweet){
+  create(tweet: any){
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('/api/tweets', JSON.stringify(tweet), { headers: headers }).map(res => res.json());

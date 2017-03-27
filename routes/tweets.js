@@ -1,63 +1,56 @@
 var express = require('express');
 var router = express.Router();
-var mongojs = require('mongojs');
-var db = mongojs('mongodb://beetlegius:beetlegius@ds139480.mlab.com:39480/twitter', ['tweets']);
+var Tweet = require('../models/tweet.js');
 
 router.get('/tweets', function(req, res, next){
-  db.tweets.find(function(err, data){
-    if (err) { res.send(err); }
-    res.json(data);
+  Tweet.find({}, function(err, data){
+    if (err) {
+      res.send(err).status(400);
+    } else {
+      res.json(data).status(200);
+    }
   });
 });
 
 router.get('/tweets/:id', function(req, res, next){
-  db.tweets.findOne({ _id: mongojs.ObjectId(req.params.id) }, function(err, data){
-    if (err) { res.send(err); }
-    res.json(data);
+  Tweet.findById(req.params.id, function(err, data){
+    if (err) {
+      res.send(err).status(400);
+    } else {
+      res.json(data).status(200);
+    }
   });
 });
 
 router.post('/tweets', function(req, res, next){
-  var tweet = req.body;
-  if (!tweet.body || !tweet.username) {
-    res.status(400);
-    res.json({ "error": "Bad Data" });
-  } else {
-      db.tweets.save(tweet, function(err, data){
-        if (err) { res.send(err); }
-        res.json(data);
-      });
-  }
+  var tweet = new Tweet(req.body);
+  tweet.save(function(err, resource) {
+    if (err) {
+      res.send(err).status(400);
+    } else {
+      res.json(resource).status(201);
+    }
+  });
 });
 
 router.delete('/tweets/:id', function(req, res, next){
-  db.tweets.remove({ _id: mongojs.ObjectId(req.params.id) }, function(err, data){
-    if (err) { res.send(err); }
-    res.json(data);
+  Tweet.remove({ _id: req.params.id }, function(err, data){
+    if (err) {
+      res.send(err).status(400);
+    } else {
+      res.json(data).status(200);
+    }
   });
 });
 
 router.put('/tweets/:id', function(req, res, next){
-  var tweet = req.body;
-  var updTweet = {};
-
-  if (tweet.body) {
-    updTweet.body = tweet.body;
-  }
-
-  if (tweet.username) {
-    updTweet.username = tweet.username;
-  }
-
-  if (!updTweet) {
-    res.status(400);
-    res.json({ "error": "Bad Data" });
-  } else {
-      db.tweets.update({ _id: mongojs.ObjectId(req.params.id) }, updTweet, {}, function(err, data){
-        if (err) { res.send(err); }
-        res.json(data);
-      });
-  }
+  Tweet.update({ _id: req.params.id }, { $set: req.body }, function(err, data){
+    if (err) {
+      res.send(err).status(400);
+    } else {
+      res.json(data).status(200);
+    }
+  });
 });
 
 module.exports = router;

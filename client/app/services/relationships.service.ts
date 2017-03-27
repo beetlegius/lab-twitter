@@ -14,16 +14,16 @@ export class RelationshipsService {
   }
 
   all(){
-    return this.http.get('/api/users/' + this.auth.userProfile.user_id + '/relationships').map(res => res.json());
+    return this.http.get('/api/users/' + (this.auth.userProfile && this.auth.userProfile.user_id) + '/relationships').map(res => res.json());
   }
 
-  create(relationship: Relationship){
+  create(relationship: any){
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('/api/relationships', JSON.stringify(relationship), { headers: headers }).map(res => res.json());
   }
 
-  delete(relationship: Relationship){
+  delete(relationship: any){
     return this.http.delete('/api/relationships/' + relationship._id).map(res => res.json());
   }
 }
